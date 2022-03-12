@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-12">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h3>External Sources</h3>
+      <div class="btn-toolbar mb-2 mb-md-0">
+      </div>
+    </div>
+  </div>
+  <div class="col-12 mb-4" *ngFor="let externalSource of externalSources">
+    <div class="card">
+      <div class="card-header font-weight-bold">
+        {{ externalSource.name }}
+      </div>
+      <div class="card-body">
+        <table class="table table-sm">
+          <tbody>
+          <tr *ngFor="let control of externalSource.controls" appScrollToSelected
+              [scrollSelected]="externalSource.key === highlightedSource && control.key === highlightedControl"
+              [class.highlighted-row]="externalSource.key === highlightedSource && control.key === highlightedControl">
+            <td class="pl-0 text-nowrap"><span class="badge badge-info">{{ control.key }}</span></td>
+            <td>
+              <a class="text-decoration-none text-reset" [routerLink]="[control.id]">{{ control.name }}</a>
+              <div>
+                <ul class="ml-0 pl-0" style="list-style: none;">
+                  <li *ngIf="control.dependentsCount === 0">
+                    <a class="text-danger small text-decoration-none">No associated controls</a>
+                  </li>
+                  <li *ngFor="let dependent of control.dependents">
+                    <a class="text-success small text-decoration-none" [routerLink]="['/controls', dependent.id]">{{ dependent.name }}</a>
+                  </li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

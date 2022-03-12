@@ -1,0 +1,80 @@
+<div class="row" *ngIf="control">
+  <div class="col-12">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h3>Control Detail</h3>
+      <div class="btn-toolbar mb-2 mb-md-0">
+        <h4><span class="badge badge-warning">{{ control.category?.name }}</span></h4>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 mb-4">
+    <div class="card">
+      <div class="card-body bg-light">
+        <div class="lead">
+          {{ control.name }}
+        </div>
+        <div *ngIf="control.details">
+          <hr>
+          {{ control.details }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 mb-4">
+    <div class="card">
+      <div class="card-header">
+        Sources
+      </div>
+      <div class="card-body">
+        <table class="table table-sm" *ngIf="control.sources.length > 0">
+          <tbody>
+          <tr *ngFor="let item of control?.sources">
+            <td class="text-nowrap pl-0"><span class="badge badge-dark">{{ item?.source?.name }}</span></td>
+            <td class="text-nowrap"><span class="badge badge-info">{{ item.key }}</span></td>
+            <td><a class="text-decoration-none text-reset" [routerLink]="['/external-sources', item.source?.key, item.key]">{{ item.name }}</a></td>
+            <td class="pr-0"><span class="badge badge-pill badge-success">D:{{ item.dependentsCount }}</span></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-6 mb-4">
+    <div class="card">
+      <div class="card-header">
+        Dependencies
+      </div>
+      <div class="card-body">
+        <table class="table table-sm" *ngIf="control.dependencies.length > 0">
+          <tbody>
+          <tr *ngFor="let item of control?.dependencies">
+            <td class="pl-0">
+              <a class="text-decoration-none text-reset" [routerLink]="['../', item.id]">{{ item.name }}</a>
+            </td>
+            <td class="text-nowrap pr-0"><span class="badge badge-secondary">{{ item.category?.name }}</span></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-6 mb-4">
+    <div class="card">
+      <div class="card-header">
+        Dependents
+      </div>
+      <div class="card-body">
+        <table class="table table-sm" *ngIf="control.dependents.length > 0">
+          <tbody>
+          <tr *ngFor="let item of control?.dependents">
+            <td class="pl-0">
+              <a class="text-decoration-none text-reset" [routerLink]="['../', item.id]">{{ item.name }}</a>
+            </td>
+            <td class="text-nowrap pr-0"><span class="badge badge-secondary">{{ item.category?.name }}</span></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

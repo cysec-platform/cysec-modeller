@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-12">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h3>CSAM Controls</h3>
+    </div>
+  </div>
+  <div class="col-12 mb-4" *ngFor="let category of categories">
+    <div class="card">
+      <div class="card-header font-weight-bold">
+        {{ category.name }}
+      </div>
+      <div class="card-body">
+        <table class="table table-sm">
+          <tbody>
+          <tr *ngFor="let control of category.controls">
+            <td class="pl-0">
+              <a class="text-decoration-none text-reset" [routerLink]="[control.id]">{{ control.name }}</a>
+            </td>
+            <td class="pr-0 text-nowrap text-align-rigth">
+              <span class="badge badge-pill badge-info ml-1" *ngIf="control.sourcesCount">
+                S:{{ control.sourcesCount }}
+              </span>
+              <span class="badge badge-pill badge-success ml-1" *ngIf="control.dependenciesCount">
+                D:{{ control.dependenciesCount }}
+              </span>
+              <span class="badge badge-pill badge-secondary ml-1" *ngIf="control.dependentsCount">
+                L:{{ control.dependentsCount }}
+              </span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

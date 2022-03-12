@@ -1,0 +1,25 @@
+GET http://localhost:8080/api/control
+Content-Type: application/json
+
+###
+
+POST http://localhost:8080/api/control
+Content-Type: application/json
+
+{ "name": "Control B", "details": "Details B" }
+
+###
+
+POST http://localhost:8080/api/control
+Content-Type: application/json
+
+{ "name": "Control C", "details": "Details C" }
+
+###
+
+GET http://localhost:8080/api/category?withControls=true
+
+###
+
+GET http://localhost:8080/api/data/stats.csv
+

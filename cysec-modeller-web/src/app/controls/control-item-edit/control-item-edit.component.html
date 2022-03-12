@@ -1,0 +1,80 @@
+<div class="row">
+  <div class="col-12">
+    <div class="pt-3 pb-2 mb-3 border-bottom">
+      <h3 *ngIf="control">Control {{ control?.id }}</h3>
+      <h3 *ngIf="!control">Create new control</h3>
+    </div>
+    <form [formGroup]="controlForm" (ngSubmit)="onAddControl()">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" formControlName="name">
+      </div>
+      <div class="form-group" formGroupName="category">
+        <label for="category">Category</label>
+        <select class="form-control" id="category" formControlName="id">
+          <option></option>
+          <option [value]="category.id" *ngFor="let category of categories">{{ category.name }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="details">Details</label>
+        <textarea class="form-control" id="details" rows="2" formControlName="details"></textarea>
+      </div>
+      <button type="submit" class="btn btn-success mr-2">{{ control ? 'Update' : 'Add' }}</button>
+      <a class="btn btn-secondary" routerLink="../">Cancel</a>
+    </form>
+  </div>
+</div>
+<div class="row" *ngIf="control">
+  <div class="col-12">
+    <h4>Sources</h4>
+    <table class="table table-striped table-sm">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of control?.sources">
+        <td>{{ item?.id }}</td>
+        <td>{{ item?.name }}</td>
+      </tr>
+      </tbody>
+    </table>
+    <h4>Dependencies</h4>
+    <table class="table table-striped table-sm">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Category</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of control?.dependencies">
+        <td>{{ item?.id }}</td>
+        <td>{{ item?.name }}</td>
+        <td>{{ item?.category }}</td>
+      </tr>
+      </tbody>
+    </table>
+    <h4>Dependents</h4>
+    <table class="table table-striped table-sm">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Category</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of control?.dependents">
+        <td>{{ item?.id }}</td>
+        <td>{{ item?.name }}</td>
+        <td>{{ item?.category }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
